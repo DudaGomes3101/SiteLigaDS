@@ -1,0 +1,34 @@
+{
+  "version": "1.0",
+  "exportDate": "2025-11-05T17:42:13.065Z",
+  "totalUsers": 3,
+  "users": [
+    {
+      "username": "gerente",
+      "password": "Z2VyZW50ZTEyM2xpZ2Fkc19zYWx0XzIwMjQ=",
+      "email": "gerente@ligads.com",
+      "birthdate": "1990-01-01",
+      "role": "gerente",
+      "isActive": true,
+      "created": "2025-11-05T17:40:13.551Z"
+    },
+    {
+      "username": "Tammy ",
+      "email": "tammy.koj@gmail.com",
+      "password": "MTIzNDU2bGlnYWRzX3NhbHRfMjAyNA==",
+      "birthdate": "1111-11-11",
+      "role": "membro",
+      "isActive": true,
+      "created": "2025-11-05T17:40:50.767Z"
+    },
+    {
+      "username": "Tiemmy",
+      "email": "tiemmy.kojima@gmail.com",
+      "password": "MTIzNDU2bGlnYWRzX3NhbHRfMjAyNA==",
+      "birthdate": "1111-11-11",
+      "role": "externo",
+      "isActive": true,
+      "created": "2025-11-05T17:41:44.676Z"
+    }
+  ]
+}

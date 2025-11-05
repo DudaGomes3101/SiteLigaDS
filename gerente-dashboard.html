@@ -4,408 +4,32 @@
     <meta charset="UTF-8">
     <title>Dashboard Gerente - Liga de Data Science UNICAMP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        /* Estilos Gerais */
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Roboto', sans-serif;
-        }
-
-        :root {
-            --primary-color: #0c6980;
-            --secondary-color: #f7ca16;
-            --light-primary: #e9f8f9;
-            --light-secondary: #fff9e6;
-            --dark-gray: #1f2937;
-            --medium-gray: #6b7280;
-            --light-gray: #f3f4f6;
-            --white: #ffffff;
-            --success-color: #28a745;
-            --warning-color: #ffc107;
-            --danger-color: #dc3545;
-            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            --radius: 0.75rem;
-            --transition: all 0.3s ease;
-        }
-
-        body {
-            background-color: var(--light-gray);
-            color: var(--dark-gray);
-            line-height: 1.6;
-        }
-
-        /* Header */
-        header {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            box-shadow: var(--shadow);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo h1 {
-            font-size: 1.5rem;
-        }
-
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logout-btn {
-            background-color: var(--secondary-color);
-            color: var(--dark-gray);
-            border: none;
-            padding: 8px 15px;
-            border-radius: var(--radius);
-            cursor: pointer;
-            font-weight: bold;
-            transition: var(--transition);
-        }
-
-        .logout-btn:hover {
-            background-color: #e6b800;
-        }
-
-        /* Container Principal */
-        .container {
-            display: flex;
-            min-height: calc(100vh - 70px);
-        }
-
-        /* Sidebar */
-        .sidebar {
-            width: 250px;
-            background-color: var(--white);
-            padding: 2rem 1rem;
-            box-shadow: var(--shadow);
-        }
-
-        .nav-menu {
-            list-style: none;
-        }
-
-        .nav-item {
-            margin-bottom: 10px;
-        }
-
-        .nav-link {
-            display: block;
-            padding: 12px 15px;
-            color: var(--dark-gray);
-            text-decoration: none;
-            border-radius: var(--radius);
-            transition: var(--transition);
-        }
-
-        .nav-link.active {
-            background-color: var(--light-primary);
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        .nav-link:hover:not(.active) {
-            background-color: var(--light-gray);
-        }
-
-        /* Conteúdo Principal */
-        .main-content {
-            flex: 1;
-            padding: 2rem;
-        }
-
-        .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 2rem;
-        }
-
-        .page-title {
-            color: var(--primary-color);
-            font-size: 1.8rem;
-        }
-
-        /* Cards de Estatísticas */
-        .stats-cards {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .stat-card {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-            text-align: center;
-        }
-
-        .stat-card h3 {
-            color: var(--medium-gray);
-            font-size: 0.9rem;
-            margin-bottom: 0.5rem;
-            text-transform: uppercase;
-        }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: bold;
-            color: var(--primary-color);
-        }
-
-        /* Tabela de Usuários */
-        .users-table-container {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            overflow: hidden;
-        }
-
-        .table-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .table-title {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-        }
-
-        .search-box {
-            padding: 8px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--radius);
-            width: 250px;
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-        }
-
-        th, td {
-            padding: 1rem 1.5rem;
-            text-align: left;
-            border-bottom: 1px solid var(--light-gray);
-        }
-
-        th {
-            background-color: var(--light-primary);
-            color: var(--primary-color);
-            font-weight: bold;
-        }
-
-        tr:hover {
-            background-color: var(--light-gray);
-        }
-
-        .role-badge {
-            display: inline-block;
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-            font-weight: bold;
-        }
-
-        .role-gerente {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .role-membro {
-            background-color: var(--success-color);
-            color: white;
-        }
-
-        .role-externo {
-            background-color: var(--warning-color);
-            color: var(--dark-gray);
-        }
-
-        .action-btn {
-            padding: 6px 12px;
-            border: none;
-            border-radius: var(--radius);
-            cursor: pointer;
-            font-size: 0.8rem;
-            font-weight: bold;
-            transition: var(--transition);
-        }
-
-        .promote-btn {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .promote-btn:hover {
-            background-color: #0a5769;
-        }
-
-        .demote-btn {
-            background-color: var(--warning-color);
-            color: var(--dark-gray);
-        }
-
-        .demote-btn:hover {
-            background-color: #e6ac00;
-        }
-
-        .delete-btn {
-            background-color: var(--danger-color);
-            color: white;
-        }
-
-        .delete-btn:hover {
-            background-color: #c82333;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .modal-content {
-            background-color: var(--white);
-            border-radius: var(--radius);
-            width: 90%;
-            max-width: 500px;
-            box-shadow: var(--shadow);
-        }
-
-        .modal-header {
-            padding: 1.5rem;
-            border-bottom: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .modal-title {
-            font-size: 1.3rem;
-            color: var(--primary-color);
-        }
-
-        .close-btn {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--medium-gray);
-        }
-
-        .modal-body {
-            padding: 1.5rem;
-        }
-
-        .form-group {
-            margin-bottom: 1rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: bold;
-        }
-
-        .form-control {
-            width: 100%;
-            padding: 10px 15px;
-            border: 1px solid var(--light-gray);
-            border-radius: var(--radius);
-        }
-
-        .modal-footer {
-            padding: 1.5rem;
-            border-top: 1px solid var(--light-gray);
-            display: flex;
-            justify-content: flex-end;
-            gap: 10px;
-        }
-
-        .btn {
-            padding: 10px 20px;
-            border: none;
-            border-radius: var(--radius);
-            cursor: pointer;
-            font-weight: bold;
-            transition: var(--transition);
-        }
-
-        .btn-primary {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        .btn-primary:hover {
-            background-color: #0a5769;
-        }
-
-        .btn-secondary {
-            background-color: var(--medium-gray);
-            color: white;
-        }
-
-        .btn-secondary:hover {
-            background-color: #5a6268;
-        }
-
-        /* Mensagens */
-        .alert {
-            padding: 12px 15px;
-            border-radius: var(--radius);
-            margin-bottom: 1rem;
-        }
-
-        .alert-success {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .alert-error {
-            background-color: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-    </style>
+    <link rel="stylesheet" href="gerente-dashboard.css">
 </head>
 <body>
     <!-- Header -->
     <header>
-        <div class="logo">
-            <h1>Liga de Data Science UNICAMP</h1>
+        <div class="logo-section">
+                    <div>
+                        <img class="logo-ds" src="image/logo.jpeg" alt="Liga de Data Science UNICAMP" >
+                    </div>
+                    <div class="logo-text">
+                        <h1>Liga de Data Science</h1>
+                        <span>UNICAMP</span>
+                    </div>
         </div>
+        
         <div class="user-info">
             <span id="currentUserName">Gerente</span>
-            <a href="dashboard.html" class="logout-btn">Voltar</a>
+            <a href="dashboard.html" class="voltar-link">Voltar</a>
             <button class="logout-btn" onclick="logout()">Sair</button>
         </div>
+
+        <button class="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
     </header>
+
+    <!-- Overlay para mobile -->
+<div class="sidebar-overlay" onclick="closeMobileMenu()"></div>
 
     <!-- Container Principal -->
     <div class="container">
@@ -413,67 +37,112 @@
         <aside class="sidebar">
             <ul class="nav-menu">
                 <li class="nav-item">
-                    <a href="#" class="nav-link active">Dashboard</a>
+                    <a href="#" class="nav-link active" onclick="showSection('dashboard')">Dashboard</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Gerenciar Usuários</a>
+                    <a href="#" class="nav-link" onclick="showSection('tools')">Ferramentas</a>
                 </li>
                 <li class="nav-item">
-                    <a href="#" class="nav-link">Relatórios</a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">Configurações</a>
+                    <a href="#" class="nav-link" onclick="showSection('backup')">Backup</a>
                 </li>
             </ul>
         </aside>
 
         <!-- Conteúdo Principal -->
         <main class="main-content">
-            <div class="page-header">
-                <h2 class="page-title">Dashboard do Gerente</h2>
-                <button class="btn btn-primary" onclick="openAddUserModal()">Adicionar Usuário</button>
+            <!-- Seção Dashboard -->
+            <div id="dashboard-section" class="section-content">
+                <div class="page-header">
+                    <h2 class="page-title">Dashboard do Gerente</h2>
+                    <button class="btn btn-primary" onclick="openAddUserModal()">Adicionar Usuário</button>
+                </div>
+
+                <!-- Cards de Estatísticas -->
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <h3>Total de Usuários</h3>
+                        <div class="stat-value" id="totalUsers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Gerentes</h3>
+                        <div class="stat-value" id="totalManagers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Membros</h3>
+                        <div class="stat-value" id="totalMembers">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <h3>Usuários Externos</h3>
+                        <div class="stat-value" id="totalExternal">0</div>
+                    </div>
+                </div>
+
+                <!-- Tabela de Usuários -->
+                <div class="users-table-container">
+                    <div class="table-header">
+                        <h3 class="table-title">Lista de Usuários</h3>
+                        <input type="text" class="search-box" id="userSearch" placeholder="Buscar usuários..." onkeyup="filterUsers()">
+                    </div>
+                    <table id="usersTable">
+                        <thead>
+                            <tr>
+                                <th>Usuário</th>
+                                <th>Email</th>
+                                <th>Tipo</th>
+                                <th>Data de Cadastro</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <!-- Os usuários serão carregados aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
             </div>
 
-            <!-- Cards de Estatísticas -->
-            <div class="stats-cards">
-                <div class="stat-card">
-                    <h3>Total de Usuários</h3>
-                    <div class="stat-value" id="totalUsers">0</div>
+            <!-- Seção Ferramentas -->
+            <div id="tools-section" class="section-content" style="display: none;">
+                <div class="page-header">
+                    <h2 class="page-title">Ferramentas do Sistema</h2>
                 </div>
-                <div class="stat-card">
-                    <h3>Gerentes</h3>
-                    <div class="stat-value" id="totalManagers">0</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Membros</h3>
-                    <div class="stat-value" id="totalMembers">0</div>
-                </div>
-                <div class="stat-card">
-                    <h3>Usuários Externos</h3>
-                    <div class="stat-value" id="totalExternal">0</div>
+
+                <div class="tools-section">
+                    <h3>Ferramentas de Manutenção</h3>
+                    <div class="tools-grid">
+                        <button class="tool-btn" onclick="forceCreateGerente()">FORÇAR CRIAÇÃO DO GERENTE</button>
+                        <button class="tool-btn" onclick="checkSystem()">VERIFICAR SISTEMA</button>
+                        <button class="tool-btn" onclick="checkEmailDuplicates()">VERIFICAR EMAILS DUPLICADOS</button>
+                        <button class="tool-btn" onclick="checkPasswordSecurity()">VERIFICAR SEGURANÇA DAS SENHAS</button>
+                        <button class="tool-btn danger" onclick="clearAndReset()">LIMPAR TUDO E RECRIAR</button>
+                    </div>
+                    
+                    <div id="toolsResult" class="tools-result">
+                        <!-- Resultados das ferramentas aparecerão aqui -->
+                    </div>
                 </div>
             </div>
 
-            <!-- Tabela de Usuários -->
-            <div class="users-table-container">
-                <div class="table-header">
-                    <h3 class="table-title">Lista de Usuários</h3>
-                    <input type="text" class="search-box" id="userSearch" placeholder="Buscar usuários..." onkeyup="filterUsers()">
+            <!-- Seção Backup -->
+            <div id="backup-section" class="section-content" style="display: none;">
+                <div class="page-header">
+                    <h2 class="page-title">Sistema de Backup</h2>
                 </div>
-                <table id="usersTable">
-                    <thead>
-                        <tr>
-                            <th>Usuário</th>
-                            <th>Email</th>
-                            <th>Tipo</th>
-                            <th>Data de Cadastro</th>
-                            <th>Ações</th>
-                        </tr>
-                    </thead>
-                    <tbody id="usersTableBody">
-                        <!-- Os usuários serão carregados aqui via JavaScript -->
-                    </tbody>
-                </table>
+
+                <div class="tools-section">
+                    <h3>Backup e Restauração</h3>
+                    <p>Exporte e importe dados do sistema para manter backups seguros.</p>
+                    
+                    <div class="backup-controls">
+                        <button class="btn btn-primary" onclick="exportUserData()">EXPORTAR BACKUP</button>
+                        
+                        <input type="file" id="backupFile" accept=".json" style="display: none;" onchange="handleBackupImport(this.files[0])">
+                        <label for="backupFile" class="file-input-label">IMPORTAR BACKUP</label>
+                    </div>
+
+                    <div id="backupResult" class="tools-result">
+                        <!-- Resultados do backup aparecerão aqui -->
+                    </div>
+                </div>
             </div>
         </main>
     </div>
@@ -521,240 +190,6 @@
         </div>
     </div>
 
-    <script>
-        // Verificar se o usuário está logado e é gerente
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentUser = JSON.parse(sessionStorage.getItem('currentUser'));
-            
-            if (!currentUser) {
-                window.location.href = "login.html";
-                return;
-            }
-            
-            if (currentUser.role !== 'gerente') {
-                alert('Você não tem permissão para acessar esta página.');
-                // Verifica se já não está no dashboard para evitar loop
-                if (!window.location.href.includes('dashboard.html')) {
-                    window.location.href = "dashboard.html";
-                }
-                return; // Importante: para a execução do script
-            }
-            
-            // Atualizar nome do usuário no header
-            document.getElementById('currentUserName').textContent = currentUser.username;
-            
-            // Carregar dados
-            loadUsersList();
-            updateStats();
-        });
-
-        // Carregar lista de usuários
-        function loadUsersList() {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const usersTableBody = document.getElementById('usersTableBody');
-            
-            usersTableBody.innerHTML = '';
-            
-            users.forEach(user => {
-                const tr = document.createElement('tr');
-                
-                // Determinar a classe do badge baseado no papel
-                let roleClass = 'role-externo';
-                if (user.role === 'membro') roleClass = 'role-membro';
-                if (user.role === 'gerente') roleClass = 'role-gerente';
-                
-                tr.innerHTML = `
-                    <td>${user.username}</td>
-                    <td>${user.email}</td>
-                    <td><span class="role-badge ${roleClass}">${user.role}</span></td>
-                    <td>${formatDate(user.birthdate)}</td>
-                    <td>
-                        ${user.role !== 'gerente' ? 
-                            `<button class="action-btn promote-btn" onclick="promoteUser('${user.username}', 'membro')">Tornar Membro</button>` : 
-                            ''}
-                        ${user.role === 'membro' ? 
-                            `<button class="action-btn demote-btn" onclick="promoteUser('${user.username}', 'externo')">Rebaixar</button>` : 
-                            ''}
-                        ${user.username !== 'gerente' ? 
-                            `<button class="action-btn delete-btn" onclick="deleteUser('${user.username}')">Excluir</button>` : 
-                            ''}
-                    </td>
-                `;
-                
-                usersTableBody.appendChild(tr);
-            });
-        }
-
-        // Atualizar estatísticas
-        function updateStats() {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            
-            const totalUsers = users.length;
-            const totalManagers = users.filter(u => u.role === 'gerente').length;
-            const totalMembers = users.filter(u => u.role === 'membro').length;
-            const totalExternal = users.filter(u => u.role === 'externo').length;
-            
-            document.getElementById('totalUsers').textContent = totalUsers;
-            document.getElementById('totalManagers').textContent = totalManagers;
-            document.getElementById('totalMembers').textContent = totalMembers;
-            document.getElementById('totalExternal').textContent = totalExternal;
-        }
-
-        // Promover/Rebaixar usuário
-        function promoteUser(username, newRole) {
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            const userIndex = users.findIndex(u => u.username === username);
-            
-            if (userIndex !== -1) {
-                users[userIndex].role = newRole;
-                localStorage.setItem('users', JSON.stringify(users));
-                
-                showAlert(`Usuário ${username} agora é ${newRole === 'membro' ? 'membro' : 'usuário externo'}`, 'success');
-                loadUsersList();
-                updateStats();
-            } else {
-                showAlert('Erro ao alterar papel do usuário', 'error');
-            }
-        }
-
-        // Excluir usuário
-        function deleteUser(username) {
-            if (confirm(`Tem certeza que deseja excluir o usuário ${username}?`)) {
-                const users = JSON.parse(localStorage.getItem('users')) || [];
-                const filteredUsers = users.filter(u => u.username !== username);
-                
-                localStorage.setItem('users', JSON.stringify(filteredUsers));
-                
-                showAlert(`Usuário ${username} excluído com sucesso`, 'success');
-                loadUsersList();
-                updateStats();
-            }
-        }
-
-        // Filtrar usuários na tabela
-        function filterUsers() {
-            const searchTerm = document.getElementById('userSearch').value.toLowerCase();
-            const rows = document.querySelectorAll('#usersTableBody tr');
-            
-            rows.forEach(row => {
-                const username = row.cells[0].textContent.toLowerCase();
-                const email = row.cells[1].textContent.toLowerCase();
-                
-                if (username.includes(searchTerm) || email.includes(searchTerm)) {
-                    row.style.display = '';
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-        }
-
-        // Modal functions
-        let currentEditingUser = null;
-
-        function openAddUserModal() {
-            currentEditingUser = null;
-            document.getElementById('modalTitle').textContent = 'Adicionar Usuário';
-            document.getElementById('modalSubmitBtn').textContent = 'Adicionar';
-            document.getElementById('userForm').reset();
-            document.getElementById('alertMessage').innerHTML = '';
-            document.getElementById('userModal').style.display = 'flex';
-        }
-
-        function closeModal() {
-            document.getElementById('userModal').style.display = 'none';
-        }
-
-        function submitUserForm() {
-            const username = document.getElementById('modalUsername').value;
-            const email = document.getElementById('modalEmail').value;
-            const password = document.getElementById('modalPassword').value;
-            const birthdate = document.getElementById('modalBirthdate').value;
-            const role = document.getElementById('modalRole').value;
-            
-            if (!username || !email || !password || !birthdate) {
-                showAlert('Por favor, preencha todos os campos', 'error', 'alertMessage');
-                return;
-            }
-            
-            const users = JSON.parse(localStorage.getItem('users')) || [];
-            
-            // Verificar se o usuário já existe (apenas para adição)
-            if (!currentEditingUser && users.find(u => u.username === username)) {
-                showAlert('Este nome de usuário já está em uso', 'error', 'alertMessage');
-                return;
-            }
-            
-            if (currentEditingUser) {
-                // Editar usuário existente
-                const userIndex = users.findIndex(u => u.username === currentEditingUser);
-                if (userIndex !== -1) {
-                    users[userIndex].email = email;
-                    users[userIndex].password = password;
-                    users[userIndex].birthdate = birthdate;
-                    users[userIndex].role = role;
-                }
-            } else {
-                // Adicionar novo usuário
-                users.push({
-                    username,
-                    email,
-                    password,
-                    birthdate,
-                    role,
-                    isActive: true
-                });
-            }
-            
-            localStorage.setItem('users', JSON.stringify(users));
-            
-            showAlert(
-                currentEditingUser ? 
-                `Usuário ${username} atualizado com sucesso` : 
-                `Usuário ${username} adicionado com sucesso`, 
-                'success'
-            );
-            
-            closeModal();
-            loadUsersList();
-            updateStats();
-        }
-
-        // Funções auxiliares
-        function formatDate(dateString) {
-            if (!dateString) return 'N/A';
-            const date = new Date(dateString);
-            return date.toLocaleDateString('pt-BR');
-        }
-
-        function showAlert(message, type, containerId = 'alertMessage') {
-            const alertDiv = document.createElement('div');
-            alertDiv.className = `alert alert-${type === 'success' ? 'success' : 'error'}`;
-            alertDiv.textContent = message;
-            
-            const container = document.getElementById(containerId);
-            container.innerHTML = '';
-            container.appendChild(alertDiv);
-            
-            // Remover alerta após 3 segundos (apenas para alertas globais)
-            if (containerId === 'alertMessage' && type === 'success') {
-                setTimeout(() => {
-                    alertDiv.remove();
-                }, 3000);
-            }
-        }
-
-        function logout() {
-            sessionStorage.removeItem('currentUser');
-            window.location.href = "login.html";
-        }
-
-        // Fechar modal ao clicar fora dele
-        window.onclick = function(event) {
-            const modal = document.getElementById('userModal');
-            if (event.target === modal) {
-                closeModal();
-            }
-        }
-    </script>
+    <script src="gerente-dashboard.js"></script>
 </body>
 </html>
