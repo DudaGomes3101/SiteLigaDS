@@ -23,6 +23,21 @@
                 <!-- O feedback será inserido aqui -->
             </div>
         </section>
+    <div id="feedbackContent" class="feedback-message">
+                </div>
+            <button id="openChatButton" class="button">Tirar Dúvidas</button>
+        </section>
+
+        <section class="chat-section" id="chatSection" style="display: none;">
+            <h2>Envie uma Mensagem para Tirar Dúvidas</h2>
+            <div id="chatContainer">
+                </div>
+            <form id="chatForm">
+                <label for="userMessage">Sua Mensagem:</label>
+                <textarea id="userMessage" name="userMessage" rows="4" required></textarea>
+                <button type="submit" class="button">Enviar Mensagem</button>
+            </form>
+        </section>
     </main>
 
     <!-- JavaScript -->
@@ -32,34 +47,38 @@
 
         // Obtém os parâmetros da URL
         const urlParams = new URLSearchParams(window.location.search);
-        const capacitationName = urlParams.get('capacitation') || 'Análise de Dados com Python';
+        // Ajusta o nome da capacitação com base no contexto do arquivo
+        const defaultCapacitationName = document.title.includes('Python') ? 'Análise de Dados com Python' :
+                                       document.title.includes('Machine') ? 'Machine Learning Avançado' :
+                                       'Introdução à Ciência de Dados';
+                                       
+        const capacitationName = urlParams.get('capacitation') || defaultCapacitationName;
         const exerciseId = urlParams.get('exerciseId');
 
-        // Dados dos exercícios
-        const exercisesData = {
-            1: {
-                title: "Exercício 1: Introdução ao Python",
-                question: "Escreva um programa em Python que imprima 'Hello, World!' na tela.",
-                correctAnswer: "print('Hello, World!')"
-            },
-            2: {
-                title: "Exercício 2: Manipulação de Dados com Pandas",
-                question: "Carregue um DataFrame a partir de um arquivo CSV e exiba as primeiras 5 linhas.",
-                correctAnswer: "df = pd.read_csv('arquivo.csv')\nprint(df.head())"
-            },
-            3: {
-                title: "Exercício 3: Visualização de Dados com Matplotlib",
-                question: "Crie um gráfico de linha simples utilizando dados de exemplo.",
-                correctAnswer: "plt.plot([1,2,3],[4,5,6])\nplt.show()"
-            }
+        // Dados dos exercícios (Atenção: MANTENHA A VERSÃO CORRETA PARA CADA PÁGINA!)
+        // EXERCÍCIO PYTHON:
+        const exercisesDataPython = {
+            1: { title: "Exercício 1: Introdução ao Python", question: "Escreva um programa em Python que imprima 'Hello, World!' na tela." },
+            2: { title: "Exercício 2: Manipulação de Dados com Pandas", question: "Carregue um DataFrame a partir de um arquivo CSV e exiba as primeiras 5 linhas." },
+            3: { title: "Exercício 3: Visualização de Dados com Matplotlib", question: "Crie um gráfico de linha simples utilizando dados de exemplo." }
+        };
+        // EXERCÍCIO MACHINE LEARNING:
+        const exercisesDataMachine = {
+            1: { title: "Exercício 1: Regressão Linear", question: "Implemente uma regressão linear simples utilizando o conjunto de dados fornecido." },
+            2: { title: "Exercício 2: Árvores de Decisão", question: "Desenvolva uma árvore de decisão para classificação de dados." },
+            3: { title: "Exercício 3: Redes Neurais", question: "Crie uma rede neural básica para reconhecimento de dígitos." }
         };
 
+        const exercisesData = capacitationName.includes('Python') ? exercisesDataPython : exercisesDataMachine;
+        
         // Atualiza o título e link de volta
         const exerciseData = exercisesData[exerciseId];
+        const backLinkTarget = capacitationName.includes('Python') ? 'capacitation_python.html' : 'capacitations_machine.html';
+
         if (exerciseData) {
             document.getElementById('exerciseTitle').innerText = exerciseData.title;
             document.getElementById('exerciseName').innerText = exerciseData.title;
-            document.getElementById('backLink').href = `capacitation_python.html`;
+            document.getElementById('backLink').href = backLinkTarget;
 
             // Exibe a pergunta do exercício
             const exerciseContent = document.getElementById('exerciseContent');
@@ -75,33 +94,135 @@
             document.getElementById('exerciseContent').innerText = "Exercício não encontrado.";
         }
 
-        // Manipula o envio do formulário
+        // ===========================================
+        // LÓGICA DE SUBMISSÃO E PROGRESSO (AJUSTADA)
+        // ===========================================
+
         document.addEventListener('DOMContentLoaded', function() {
             const form = document.getElementById('exerciseForm');
             if (form) {
                 form.addEventListener('submit', function(event) {
-                    event.preventDefault(); // Evita o recarregamento da página
+                    event.preventDefault();
 
                     const userAnswer = document.getElementById('userAnswer').value.trim();
                     const feedbackContent = document.getElementById('feedbackContent');
 
-                    // Simulação de verificação da resposta
                     if (userAnswer !== "") {
-                        // Aqui você pode adicionar lógica para verificar a resposta do usuário
-
+                        // NOVO: Mensagem de submissão para avaliação
+                        feedbackContent.innerText = "Código submetido para avaliação. Você será notificado sobre o feedback.";
+                        feedbackContent.style.color = "green";
+                        
                         // Marca o exercício como concluído no localStorage
                         const key = capacitationName + '_exercise_' + exerciseId;
                         localStorage.setItem(key, 'completed');
 
-                        feedbackContent.innerText = "Resposta enviada com sucesso! Aguarde o feedback.";
-                        feedbackContent.style.color = "green";
                     } else {
                         feedbackContent.innerText = "Por favor, insira seu código.";
                         feedbackContent.style.color = "red";
                     }
                 });
             }
+            
+            // NOVO: Inicializa o histórico de mensagens
+            loadMessages();
         });
+
+        // ===========================================
+        // LÓGICA DO CHAT/DÚVIDAS (COPIADA DO 1+1)
+        // ===========================================
+        
+        const currentExerciseTitle = exerciseData ? exerciseData.title : 'Exercício Não Encontrado';
+
+        // Função para armazenar mensagens no localStorage
+        function storeMessage(messageObj) {
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            messages.push(messageObj);
+            localStorage.setItem('messages', JSON.stringify(messages));
+        }
+        
+        // Função para exibir mensagens salvas
+        function loadMessages() {
+            const chatContainer = document.getElementById('chatContainer');
+            if (!chatContainer) return;
+            chatContainer.innerHTML = '';
+            
+            const messages = JSON.parse(localStorage.getItem('messages')) || [];
+            
+            messages.filter(msg => msg.exerciseId == exerciseId && msg.exerciseTitle === currentExerciseTitle)
+                    .forEach(msg => {
+                        const messageElement = document.createElement('div');
+                        messageElement.classList.add('message', msg.from === 'user' ? 'user-message' : 'support-message');
+                        messageElement.innerText = msg.content;
+                        chatContainer.appendChild(messageElement);
+                    });
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        // Simula a resposta do suporte e armazena no localStorage
+        function simulateSupportResponse(userMessage) {
+            setTimeout(function() {
+                const chatContainer = document.getElementById('chatContainer');
+                const supportMessage = "Obrigado pela sua mensagem: '" + userMessage.substring(0, 30) + "...'. Nossa equipe entrará em contato em breve para tirar sua dúvida.";
+                
+                const responseElement = document.createElement('div');
+                responseElement.classList.add('message', 'support-message');
+                responseElement.innerText = supportMessage;
+                chatContainer.appendChild(responseElement);
+
+                const supportMessageObj = {
+                    exerciseId: exerciseId,
+                    exerciseTitle: currentExerciseTitle,
+                    from: 'support',
+                    content: supportMessage,
+                    date: new Date().toLocaleString(),
+                    read: false
+                };
+                storeMessage(supportMessageObj);
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+        }
+
+        // Event listener para abrir a seção de chat
+        document.getElementById('openChatButton').addEventListener('click', function() {
+            const chatSection = document.getElementById('chatSection');
+            if (chatSection.style.display === 'none') {
+                chatSection.style.display = 'block';
+                loadMessages(); // Carrega as mensagens ao abrir
+                chatSection.scrollIntoView({ behavior: 'smooth' });
+            } else {
+                chatSection.style.display = 'none';
+            }
+        });
+
+        // Event listener para enviar a mensagem do chat
+        document.getElementById('chatForm').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const userMessage = document.getElementById('userMessage').value;
+            const chatContainer = document.getElementById('chatContainer');
+
+            const messageElement = document.createElement('div');
+            messageElement.classList.add('message', 'user-message');
+            messageElement.innerText = userMessage;
+            chatContainer.appendChild(messageElement);
+
+            document.getElementById('userMessage').value = '';
+
+            const messageObj = {
+                exerciseId: exerciseId,
+                exerciseTitle: currentExerciseTitle,
+                from: 'user',
+                content: userMessage,
+                date: new Date().toLocaleString(),
+                read: true
+            };
+            storeMessage(messageObj);
+
+            simulateSupportResponse(userMessage);
+
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        });
+
     </script>
 </body>
 </html>

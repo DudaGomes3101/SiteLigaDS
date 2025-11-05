@@ -2,147 +2,373 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Capacitação - Introdução à Ciência de Dados</title>
-    <link rel="stylesheet" href="styles2.css">
-</head>
-<body>
-    <!-- Cabeçalho -->
-    <header>
-        <h1 id="capacitationTitle">Introdução à Ciência de Dados</h1>
-        <a href="dashboard.html" class="button">Voltar ao Dashboard</a>
-    </header>
-
-    <!-- Conteúdo Principal -->
-    <main class="capacitation-container">
-        <!-- Seção do PDF -->
-        <section class="pdf-section">
-            <h2>Material da Capacitação</h2>
-            <label class="checkbox-label">
-                <input type="checkbox" id="pdfCheckbox">
-                <span class="checkmark"></span>
-                <a href="pdfs/introducao_ciencia_dados.pdf" id="pdfLink" target="_blank">Download do PDF</a>
-            </label>
-        </section>
-
-        <!-- Seção de Exercícios -->
-        <section class="exercises-section">
-            <h2>Exercícios</h2>
-            <ul id="exercisesList">
-                <!-- Os exercícios serão inseridos aqui via JavaScript -->
-            </ul>
-        </section>
-
-        <!-- Barra de Progresso -->
-        <section class="progress-section">
-            <h2>Progresso</h2>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
-            </div>
-            <p id="progressText">0% concluído</p>
-        </section>
-    </main>
-
-    <!-- JavaScript -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard do Aluno - Liga de Data Science UNICAMP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="styles.css" rel="stylesheet">
+    
     <script>
-        // Dados da capacitação
-        const capacitation = {
-            name: "Introdução à Ciência de Dados",
-            pdfLink: "pdfs/introducao_ciencia_dados.pdf",
-            exercises: [
-                { id: 1, title: "Exercício 1: Conceitos Básicos" },
-                { id: 2, title: "Exercício 2: Análise Descritiva" },
-                { id: 3, title: "Exercício 3: Visualização de Dados" }
-            ]
-        };
-
-        // Inicializa a página com os dados da capacitação
-        document.getElementById('capacitationTitle').innerText = capacitation.name;
-        document.getElementById('pdfLink').href = capacitation.pdfLink;
-
-        // Funções para gerenciar o progresso
-        const totalItems = capacitation.exercises.length + 1; // Exercícios + PDF
-        let completedItems = 0;
-
-        // Inicializa as caixas de seleção e o progresso
-        window.onload = function() {
-            // Carrega o progresso do localStorage
-            const pdfCompleted = localStorage.getItem(capacitation.name + '_pdf') === 'true';
-            document.getElementById('pdfCheckbox').checked = pdfCompleted;
-            if (pdfCompleted) completedItems++;
-
-            // Carrega os exercícios
-            const exercisesList = document.getElementById('exercisesList');
-            capacitation.exercises.forEach(exercise => {
-                const li = document.createElement('li');
-
-                const label = document.createElement('label');
-                label.className = 'checkbox-label';
-
-                // Cria o link para o exercício
-                const exerciseLink = document.createElement('a');
-                exerciseLink.href = `exercise_feedback.html?capacitation=${encodeURIComponent(capacitation.name)}&exerciseId=${exercise.id}`;
-                exerciseLink.innerText = exercise.title;
-
-                // Verifica se o exercício foi concluído com sucesso
-                const key = capacitation.name + '_exercise_' + exercise.id;
-                const exerciseCompleted = localStorage.getItem(key) === 'completed';
-
-                // Cria um ícone de checkmark se o exercício foi concluído
-                if (exerciseCompleted) {
-                    const checkmarkIcon = document.createElement('span');
-                    checkmarkIcon.className = 'checkmark-icon';
-                    label.appendChild(checkmarkIcon);
-                    completedItems++;
-                } else {
-                    // Espaço reservado para alinhamento
-                    const emptySpace = document.createElement('span');
-                    emptySpace.className = 'empty-space';
-                    label.appendChild(emptySpace);
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ds-primary': 'var(--primary-color)',
+                        'ds-secondary': 'var(--secondary-color)',
+                        'ds-bg-light': 'var(--light-gray)',
+                        'ds-dark': 'var(--dark-gray)',
+                        'ds-medium-gray': 'var(--medium-gray)',
+                        'ds-blue-light': 'var(--light-primary)',
+                    },
+                    fontFamily: {
+                        sans: ['Roboto', 'sans-serif'],
+                    },
                 }
-
-                label.appendChild(exerciseLink);
-
-                li.appendChild(label);
-                exercisesList.appendChild(li);
-            });
-
-            updateProgressBar();
-
-            // Adiciona ouvinte para a caixa de seleção do PDF
-            document.getElementById('pdfCheckbox').addEventListener('change', updateProgress);
-        };
-
-        function updateProgress() {
-            completedItems = 0;
-
-            // Verifica a caixa de seleção do PDF
-            const pdfCheckbox = document.getElementById('pdfCheckbox');
-            if (pdfCheckbox.checked) {
-                completedItems++;
-                localStorage.setItem(capacitation.name + '_pdf', 'true');
-            } else {
-                localStorage.setItem(capacitation.name + '_pdf', 'false');
             }
-
-            // Atualiza o progresso dos exercícios
-            capacitation.exercises.forEach(exercise => {
-                const key = capacitation.name + '_exercise_' + exercise.id;
-                const exerciseCompleted = localStorage.getItem(key) === 'completed';
-                if (exerciseCompleted) {
-                    completedItems++;
-                }
-            });
-
-            updateProgressBar();
+        }
+    </script>
+    
+    <style>
+        body {
+            background-color: var(--light-gray); 
+            color: var(--dark-gray);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
         }
 
-        function updateProgressBar() {
-            const percentage = Math.round((completedItems / totalItems) * 100);
-            const progressFill = document.getElementById('progressFill');
-            const progressText = document.getElementById('progressText');
+        /* Estilos do Logo para herdar do index.html */
+        .logo-section {
+            display: flex;
+            align-items: center;
+        }
+        .logo-section .logo-ds {
+            height: 40px; /* Ajuste o tamanho conforme o seu styles.css */
+            width: auto;
+            margin-right: 0.75rem;
+        }
+        .logo-section .logo-text {
+            line-height: 1.2;
+        }
+        .logo-section .logo-text h1 {
+            font-size: 1.25rem; /* Ajuste o tamanho do título */
+            font-weight: 700;
+            color: var(--dark-gray);
+        }
+        .logo-section .logo-text span {
+            font-size: 0.8rem;
+            color: var(--medium-gray);
+            display: block;
+        }
 
-            progressFill.style.width = percentage + '%';
-            progressText.innerText = percentage + '% concluído';
+        /* Estilo do cabeçalho da Dashboard */
+        .dashboard-header {
+            background: linear-gradient(90deg, var(--primary-color) 0%, #1a7d87 100%);
+            color: var(--white);
+            padding: 3rem 0;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .dashboard-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--secondary-color);
+        }
+
+        /* Estilos dos Cards de Cursos */
+        .course-card-dashboard {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow);
+            transition: transform 0.3s, box-shadow 0.3s;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        .course-card-dashboard.coming-soon {
+             background-color: var(--light-primary);
+             border: 2px dashed var(--primary-color);
+             justify-content: center;
+             align-items: center;
+             text-align: center;
+        }
+
+        .course-card-dashboard:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        .course-card-dashboard.coming-soon:hover {
+             transform: translateY(-3px);
+             cursor: default;
+        }
+
+        .course-card-image {
+            width: 100%;
+            height: 140px; 
+            object-fit: cover;
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .course-details {
+            padding: 1.25rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        
+        /* Botões de Ação na Dashboard */
+        .btn-continue {
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.2);
+            padding: 0.5rem 1rem; 
+        }
+        .btn-continue:hover {
+            background-color: #1a7d87;
+        }
+
+        .tag-level {
+            font-size: 0.75rem;
+            font-weight: 700;
+            padding: 0.25rem 0.6rem;
+            border-radius: 9999px;
+            text-transform: uppercase;
+        }
+
+        .tag-iniciante { background-color: var(--light-primary); color: var(--primary-color); }
+        .tag-intermediario { background-color: var(--light-secondary); color: #ff9800; }
+        .tag-especialização { background-color: #d1f7d5; color: #38a169; }
+    </style>
+</head>
+<body>
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <a href="index.html" class="logo-section">
+                <div>
+                    <img class="logo-ds" src="image/logo.jpeg" alt="Liga de Data Science UNICAMP">
+                </div>
+                <div class="logo-text">
+                    <h1>Liga de Data Science</h1>
+                    <span>UNICAMP</span>
+                </div>
+            </a>
+
+            <div class="space-x-4 flex items-center">
+                <span id="welcome-message" class="text-ds-dark font-medium text-sm hidden md:inline">Olá, Aluno!</span>
+                <a href="index.html" class="text-ds-dark hover:text-ds-primary transition font-medium">Início</a>
+                <a href="login.html" class="bg-ds-secondary text-ds-dark px-4 py-2 rounded-lg font-semibold hover:bg-[#e0b411] transition">Sair</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="dashboard-header">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 id="greeting-title" class="dashboard-title">Bem-vindo(a) de volta!</h1>
+            <p id="dashboard-subtitle" class="text-white text-lg mt-2 opacity-90">Explore as capacitações e comece a sua jornada em Data Science.</p>
+        </div>
+    </section>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <div class="mb-8 p-4 bg-white rounded-xl shadow-md border border-ds-primary/20">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
+                <input type="text" id="course-search" onkeyup="filterCourses()" placeholder="Buscar por Título ou Categoria..." class="p-3 rounded-lg border border-gray-300 focus:ring-ds-primary focus:border-ds-primary col-span-1 md:col-span-2">
+                
+                <select id="level-filter" onchange="filterCourses()" class="p-3 rounded-lg border border-gray-300 focus:ring-ds-primary focus:border-ds-primary">
+                    <option value="todos">Nível (Todos)</option>
+                    <option value="iniciante">Iniciante</option>
+                    <option value="intermediario">Intermediário</option>
+                    <option value="especialização">Especialização</option>
+                </select>
+                
+                <select id="duration-filter" onchange="filterCourses()" class="p-3 rounded-lg border border-gray-300 focus:ring-ds-primary focus:border-ds-primary">
+                    <option value="todos">Duração (Todas)</option>
+                    <option value="curto">Até 5h</option>
+                    <option value="medio">5h - 15h</option>
+                    <option value="longo">Mais de 15h</option>
+                </select>
+            </div>
+        </div>
+
+        <h2 class="text-2xl font-bold text-ds-dark mb-6">Capacitações Disponíveis</h2>
+        <div id="courses-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            </div>
+
+    </main>
+
+    <footer class="bg-ds-dark text-gray-400 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            &copy; 2025 Liga DS UNICAMP.
+        </div>
+    </footer>
+    
+    <script>
+        // --- BASE DE DADOS SIMULADA (NOMES E CONTEÚDO CORRIGIDOS) ---
+        const MOCK_COURSES = [
+            {
+                id: 'python',
+                title: "Fundamentos de Data Science com Python",
+                headline: "Guia completo para Python, SQL e os pilares essenciais da mentalidade do Cientista de Dados.",
+                category: "Data Science", 
+                level: "iniciante", 
+                url_capa: "https://placehold.co/700x400/0c6980/e9f8f9?text=PYTHON+FUNDAMENTOS", 
+                duracao_total: "6 horas", 
+                redirectUrl: 'capacitation_python.html' 
+            },
+            {
+                // CORREÇÃO APLICADA: Renomeado para refletir o conteúdo da apostila
+                id: 'python_intermediario',
+                title: "Python Intermediário: Estruturas e POO", 
+                headline: "Aprofunde-se em Funções, Estruturas de Repetição, e no uso de Classes e Bibliotecas essenciais.",
+                category: "Programação",
+                level: "intermediario",
+                url_capa: "https://placehold.co/700x400/f7ca16/1f2937?text=PYTHON+INTERMEDIÁRIO",
+                duracao_total: "12 horas",
+                redirectUrl: 'capacitations_machine.html' 
+            },
+            {
+                id: 'pandas',
+                title: "Dominando Pandas para Análise",
+                headline: "Técnicas avançadas para limpeza, otimização de memória e manipulação de Data Frames.",
+                category: "Análise de Dados",
+                level: "especialização",
+                url_capa: "https://placehold.co/700x400/38a169/f0fdf4?text=PANDAS+AVANÇADO",
+                duracao_total: "5 horas",
+                redirectUrl: 'capacitation_pandas.html'
+            }
+        ];
+        
+        // Simulação do nome do usuário
+        const USER_NAME = "Duda"; 
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('greeting-title').textContent = `Bem-vindo(a) de volta, ${USER_NAME}!`;
+            document.getElementById('welcome-message').textContent = `Olá, ${USER_NAME}!`;
+            renderCourses(MOCK_COURSES);
+        });
+
+        // --- LÓGICA DE RENDERIZAÇÃO ---
+        function renderCourses(courses) {
+            const container = document.getElementById('courses-list');
+            container.innerHTML = '';
+
+            courses.forEach(course => {
+                
+                const card = document.createElement('div');
+                card.className = 'course-card-dashboard shadow-lg';
+                
+                const levelClass = `tag-${course.level.toLowerCase()}`;
+                
+                // SVG para ícone do relógio (Duração)
+                const timeIcon = `
+                    <svg class="w-4 h-4 mr-1 text-ds-medium-gray" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                    </svg>
+                `;
+                
+                // SVG para ícone de acesso (Botão)
+                const accessIcon = `
+                    <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                    </svg>
+                `;
+
+                card.innerHTML = `
+                    <a href="${course.redirectUrl}">
+                        <img src="${course.url_capa}" alt="Capa do curso ${course.title}" class="course-card-image">
+                    </a>
+
+                    <div class="course-details space-y-4">
+                        
+                        <div class="flex justify-between items-center">
+                            <span class="tag-level ${levelClass}">
+                                ${course.level.toUpperCase()}
+                            </span>
+                            <span class="text-sm flex items-center text-ds-medium-gray">
+                                ${timeIcon} ${course.duracao_total}
+                            </span>
+                        </div>
+
+                        <div>
+                            <a href="${course.redirectUrl}" class="text-xl font-bold text-ds-dark hover:text-ds-primary transition block">${course.title}</a>
+                            <p class="text-sm text-ds-medium-gray mt-1 line-clamp-2">${course.headline}</p>
+                        </div>
+                        
+                        <a href="${course.redirectUrl}" class="mt-4 w-full text-center py-2 rounded-lg btn-continue flex items-center justify-center">
+                            Acessar Curso
+                            ${accessIcon}
+                        </a>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+            
+            // Adicionando o card de Novidades
+            container.innerHTML += `
+                <div class="course-card-dashboard coming-soon p-6 space-y-4">
+                    <svg class="w-12 h-12 text-ds-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    <h3 class="text-xl font-bold text-ds-dark">Novos Cursos em Breve</h3>
+                    <p class="text-ds-medium-gray text-sm">
+                        Estamos preparando mais capacitações incríveis. Fique de olho no catálogo!
+                    </p>
+                </div>
+            `;
+        }
+
+        // --- LÓGICA DE FILTRAGEM E BUSCA ---
+        window.filterCourses = function() {
+            const searchTerm = document.getElementById('course-search').value.toLowerCase();
+            const selectedLevel = document.getElementById('level-filter').value;
+            const selectedDuration = document.getElementById('duration-filter').value;
+
+            // Filtragem apenas nos MOCK_COURSES (excluindo o card 'Novos Cursos')
+            const filteredCourses = MOCK_COURSES.filter(course => {
+                const titleCategoryMatch = 
+                    course.title.toLowerCase().includes(searchTerm) || 
+                    course.category.toLowerCase().includes(searchTerm);
+
+                const levelMatch = selectedLevel === 'todos' || course.level === selectedLevel;
+
+                const durationHours = parseInt(course.duracao_total.split(' ')[0]);
+                let durationMatch = true;
+
+                if (selectedDuration !== 'todos') {
+                    if (selectedDuration === 'curto') {
+                        durationMatch = durationHours <= 5;
+                    } else if (selectedDuration === 'medio') {
+                        durationMatch = durationHours > 5 && durationHours <= 15;
+                    } else if (selectedDuration === 'longo') {
+                        durationMatch = durationHours > 15;
+                    }
+                }
+
+                return titleCategoryMatch && levelMatch && durationMatch;
+            });
+
+            // Se houver cursos filtrados, renderiza os cards
+            if (filteredCourses.length > 0) {
+                renderCourses(filteredCourses);
+            }
+            
+            // Se nenhum curso corresponder ao filtro E o filtro não for "Todos"
+            if (filteredCourses.length === 0 && (searchTerm || selectedLevel !== 'todos' || selectedDuration !== 'todos')) {
+                 document.getElementById('courses-list').innerHTML = `
+                    <div class="col-span-full text-center py-10 bg-white rounded-xl shadow-md border-ds-secondary/50 border-l-4">
+                        <p class="text-xl font-semibold text-ds-dark">Nenhuma capacitação encontrada com esses filtros.</p>
+                        <p class="text-ds-medium-gray mt-2">Tente buscar por termos como 'Python', 'SQL' ou reajuste o Nível.</p>
+                    </div>
+                 `;
+            }
+
+            // Se o filtro estiver vazio, mostra todos os MOCK_COURSES + o card de novidades
+            if (!searchTerm && selectedLevel === 'todos' && selectedDuration === 'todos') {
+                renderCourses(MOCK_COURSES);
+            }
         }
     </script>
 </body>

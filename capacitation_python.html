@@ -2,148 +2,263 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Capacitação - Análise de Dados com Python</title>
-    <link rel="stylesheet" href="styles2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos de Data Science com Python</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        /* Estilos CSS Base da Página de Detalhes (Herança da Estética DS) */
+        :root {
+            --primary-color: #0d47a1; /* Azul Escuro */
+            --secondary-color: #ffc107; /* Amarelo */
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --light-gray: #f3f4f6;
+            --white: #ffffff;
+            --light-primary: #e3f2fd; /* Fundo claro para tags */
+            --radius-lg: 0.75rem;
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .course-detail-hero {
+            padding: 3rem 0;
+            background: linear-gradient(90deg, var(--primary-color) 0%, #1a7d87 100%);
+            color: var(--white);
+        }
+
+        .course-sidebar-card {
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            background-color: var(--white);
+            color: var(--dark-gray);
+            padding: 1.5rem;
+            position: sticky;
+            top: 5rem;
+            z-index: 20; 
+        }
+
+        .course-cover-image {
+            width: 100%;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            object-fit: cover;
+            aspect-ratio: 16 / 9;
+        }
+
+        .content-section {
+            border: 1px solid var(--light-primary);
+            background-color: var(--light-gray);
+            border-radius: var(--radius-lg);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .content-header {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            font-weight: 700;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .content-body {
+            padding: 1.5rem;
+            background-color: var(--white);
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .cta-button-access {
+            background-color: var(--secondary-color);
+            color: var(--dark-gray);
+            font-weight: 700;
+            transition: background-color 0.2s;
+        }
+        .cta-button-access:hover {
+            background-color: #e0b411;
+        }
+        
+        .list-icon-check svg {
+            color: var(--primary-color);
+        }
+
+        /* Corrigindo explicitamente a cor do texto da tag de nível */
+        .tag-style {
+            color: var(--dark-gray); 
+        }
+        
+        /* Alinhamento dos itens da lista (Metas e Requisitos) */
+        .list-item-aligned {
+            display: flex;
+            align-items: flex-start; /* Alinha o texto e o ícone no topo */
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <h1 id="capacitationTitle">Análise de Dados com Python</h1>
-        <a href="dashboard.html" class="button">Voltar ao Dashboard</a>
+
+    <header class="header sticky top-0 z-50 bg-secondary shadow-md">
+        <div class="container header-content">
+            <a href="index.html" class="logo-section">
+                <div><img class="logo-ds" src="image/logo.jpeg" alt="Liga de Data Science UNICAMP"></div>
+                <div class="logo-text"><h1>Liga de Data Science</h1><span>UNICAMP</span></div>
+            </a>
+            <div class="nav-desktop">
+                <a href="capacitations.html" class="btn-outline">Catálogo de Cursos</a>
+                </div>
+        </div>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="capacitation-container">
-        <!-- Seção do PDF -->
-        <section class="pdf-section">
-            <h2>Material da Capacitação</h2>
-            <label class="checkbox-label">
-                <input type="checkbox" id="pdfCheckbox">
-                <span class="checkmark"></span>
-                <a href="pdfs/analise_dados_python.pdf" id="pdfLink" target="_blank">Download do PDF</a>
-            </label>
-        </section>
-
-        <!-- Seção de Exercícios -->
-        <section class="exercises-section">
-            <h2>Exercícios</h2>
-            <ul id="exercisesList">
-                <!-- Os exercícios serão inseridos aqui via JavaScript -->
-            </ul>
-        </section>
-
-        <!-- Barra de Progresso -->
-        <section class="progress-section">
-            <h2>Progresso</h2>
-            <div class="progress-bar">
-                <div class="progress-fill" id="progressFill"></div>
+    <section class="course-detail-hero">
+        <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div class="lg:col-span-2">
+                <p class="text-secondary font-semibold mb-2 text-sm uppercase">Programação / Python Básico</p>
+                <h1 class="text-4xl font-extrabold mb-3">Fundamentos de Data Science com Python</h1>
+                <p class="text-xl opacity-90 mb-4">Aprenda os conceitos de IDEs, variáveis e a lógica de programação essencial em Python.</p>
+                
+                <div class="flex flex-wrap items-center space-x-6 text-sm font-medium">
+                    <span class="tag-style bg-light-primary text-dark-gray px-3 py-1 rounded-full">INICIANTE</span>
+                    <span class="text-white opacity-90 flex items-center">
+                        <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path></svg>
+                        Duração Estimada: 6 horas de estudo
+                    </span>
+                </div>
             </div>
-            <p id="progressText">0% concluído</p>
-        </section>
+
+            <div class="lg:col-span-1">
+                <div class="course-sidebar-card">
+                    <img src="https://placehold.co/700x400/0d47a1/e3f2fd?text=PYTHON+BÁSICO" alt="Capa do Curso" class="course-cover-image mb-4">
+
+                    <h4 class="text-3xl font-extrabold text-ds-dark mb-4">
+                        Acesso Ilimitado
+                    </h4>
+
+                    <a href="https://drive.google.com/file/d/1xRq-ntyIJTsBby6YuqQgKBCnhCritejp/view" 
+                       target="_blank"
+                       class="cta-button-access w-full block text-center py-3 text-xl rounded-lg mb-2">
+                        Acessar Material
+                    </a>
+                    
+                    <h4 class="text-lg font-bold mt-6 mb-3 text-ds-dark border-t pt-3">Material Incluído:</h4>
+                    <ul class="space-y-2 text-sm text-medium-gray">
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zM5 9h10v2H5V9zm0 3h6v2H5v-2z"></path></svg>1 Apostila PDF Completa (Básico)</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M12.928 2.072A1 1 0 0012 2H8a1 1 0 00-.707 1.707L8.586 6H4a1 1 0 00-1 1v7a1 1 0 001 1h8a1 1 0 001-1v-7a1 1 0 00-1-1h-4.586l1.293-1.293A1 1 0 0012.928 2.072z" clip-rule="evenodd"></path></svg>Acesso Vitalício</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.933-.645l4-12a1 1 0 011.265-.633zM7.07 9.293a1 1 0 010 1.414L3.757 14.07a1 1 0 01-1.414-1.414l3.313-3.314a1 1 0 011.414 0zm9.15 0a1 1 0 000 1.414l3.313 3.314a1 1 0 001.414-1.414l-3.313-3.314a1 1 0 00-1.414 0z" clip-rule="evenodd"></path></svg>Exercícios e Exemplos de Código</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main class="container mx-auto py-10 grid grid-cols-1 lg:grid-cols-3 gap-10">
+        
+        <div class="lg:col-span-2">
+
+            <section class="mb-8 p-6 bg-white rounded-lg shadow-md border-t-4 border-ds-primary">
+                <h2 class="text-2xl font-bold text-ds-dark mb-4">Sobre a Apostila de Python Básico</h2>
+                <p class="text-medium-gray leading-relaxed">
+                    Esta apostila visa apresentar a linguagem Python, que é muito popular, especialmente para trabalhar com dados. O ambiente para exercitar a linguagem é o que chamamos de IDE (Integrated Development Environment). O Google Colaboratory (Colab) é uma possibilidade online, gratuita e colaborativa, ideal para praticar Python sem instalações. O recurso mais primordial que o Python proporciona consiste na definição de variáveis, que funcionam como um espaço na memória do computador que pode guardar um valor e receber um "apelido".
+                </p>
+            </section>
+
+            <section class="mb-8 p-6 content-section">
+                <h2 class="text-2xl font-bold text-ds-dark mb-4">O que você aprenderá (Metas)</h2>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 list-icon-check">
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Compreender o que é uma IDE e como usar o Google Colab.</span></li>
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Dominar a sintaxe de variáveis, a indexação de Listas (`list`) e Strings (`str`).</span></li>
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Aplicar operações matemáticas e operadores condicionais (>, <, ==).</span></li>
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Utilizar a estrutura condicional `if else` e operadores lógicos (`or` e `and`).</span></li>
+                </ul>
+            </section>
+            
+            <section class="mb-8">
+                <h2 class="text-2xl font-bold text-ds-dark mb-4">Conteúdo Programático (Baseado no SUMÁRIO da Apostila)</h2>
+                
+                <div class="space-y-4">
+                    
+                    <details class="content-section" open>
+                        <summary class="content-header text-lg">Capítulo 1: Introdução, Variáveis e IDEs</summary>
+                        <div class="content-body space-y-3">
+                            <p class="text-sm text-medium-gray">Tópicos: IDEs e Google Colab, Introdução ao Python, Variáveis, Tipos de Variáveis (int, float, bool, str, list).</p>
+                            <a href="https://drive.google.com/file/d/1xRq-ntyIJTsBby6YuqQgKBCnhCritejp/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Acessar Apostila Completa (PDF)
+                            </a>
+                            <a href="exercise_feedback_python.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
+                                Acessar Exercícios de Variáveis
+                            </a>
+                        </div>
+                    </details>
+                    
+                    <details class="content-section">
+                        <summary class="content-header text-lg">Capítulo 2: Listas, Strings e Operações</summary>
+                        <div class="content-body space-y-3">
+                            <p class="text-sm text-medium-gray">Tópicos: Listas e indexação, Strings, Operações matemáticas e operadores.</p>
+                            <a href="https://drive.google.com/file/d/1xRq-ntyIJTsBby6YuqQgKBCnhCritejp/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Acessar Apostila Completa (PDF)
+                            </a>
+                            <a href="exercise_feedback_python.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
+                                Acessar Exercícios de Listas e Strings
+                            </a>
+                        </div>
+                    </details>
+                    
+                    <details class="content-section">
+                        <summary class="content-header text-lg">Capítulo 3: Estruturas Condicionais e Lógicas</summary>
+                        <div class="content-body space-y-3">
+                            <p class="text-sm text-medium-gray">Tópicos: Estruturas Condicionais (`if/else`) e indentação, Booleanos e Operadores Relacionais, Lógica (`or` e `and`).</p>
+                            <a href="https://drive.google.com/file/d/1xRq-ntyIJTsBby6YuqQgKBCnhCritejp/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
+                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                                Acessar Apostila Completa (PDF)
+                            </a>
+                            <a href="exercise_feedback_python.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                                <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
+                                Acessar Exercícios de Lógica
+                            </a>
+                        </div>
+                    </details>
+
+                </div>
+            </section>
+            
+            <section class="mt-8 p-6 bg-light-gray rounded-lg border border-gray-300">
+                <h2 class="text-2xl font-bold text-ds-dark mb-3">Requisitos</h2>
+                <ul class="list-disc list-inside space-y-1 text-medium-gray pl-4">
+                    <li>Nenhuma experiência prévia em programação é necessária.</li>
+                    <li>Computador com acesso à internet para utilizar o Google Colab.</li>
+                </ul>
+            </section>
+        </div>
+
+        <div class="lg:col-span-1 hidden lg:block">
+            <div class="course-sidebar-card">
+                 <img src="https://placehold.co/700x400/0d47a1/e3f2fd?text=PYTHON+BÁSICO" alt="Capa do Curso" class="course-cover-image mb-4">
+                 <h4 class="text-3xl font-extrabold text-ds-dark mb-4">Acesso Ilimitado</h4>
+                 <a href="https://drive.google.com/file/d/1xRq-ntyIJTsBby6YuqQgKBCnhCritejp/view" 
+                    target="_blank"
+                    class="cta-button-access w-full block text-center py-3 text-xl rounded-lg mb-2">
+                     Acessar Material
+                 </a>
+                 <h4 class="text-lg font-bold mt-6 mb-3 text-ds-dark border-t pt-3">Material Incluído:</h4>
+                 <ul class="space-y-2 text-sm text-medium-gray">
+                     <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zM5 9h10v2H5V9zm0 3h6v2H5v-2z"></path></svg>1 Apostila PDF Completa (Básico)</li>
+                     <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M12.928 2.072A1 1 0 0012 2H8a1 1 0 00-.707 1.707L8.586 6H4a1 1 0 00-1 1v7a1 1 0 001 1h8a1 1 0 001-1v-7a1 1 0 00-1-1h-4.586l1.293-1.293A1 1 0 0012.928 2.072z" clip-rule="evenodd"></path></svg>Acesso Vitalício</li>
+                     <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.933-.645l4-12a1 1 0 011.265-.633zM7.07 9.293a1 1 0 010 1.414L3.757 14.07a1 1 0 01-1.414-1.414l3.313-3.314a1 1 0 011.414 0zm9.15 0a1 1 0 000 1.414l3.313 3.314a1 1 0 001.414-1.414l-3.313-3.314a1 1 0 00-1.414 0z" clip-rule="evenodd"></path></svg>Exercícios e Exemplos de Código</li>
+                 </ul>
+            </div>
+        </div>
     </main>
 
-    <!-- JavaScript -->
-    <script>
-        // Dados da capacitação
-        const capacitation = {
-            name: "Análise de Dados com Python",
-            pdfLink: "pdfs/analise_dados_python.pdf",
-            exercises: [
-                { id: 1, title: "Exercício 1: Introdução ao Python" },
-                { id: 2, title: "Exercício 2: Manipulação de Dados com Pandas" },
-                { id: 3, title: "Exercício 3: Visualização de Dados com Matplotlib" }
-            ]
-        };
-
-        // Inicializa a página com os dados da capacitação
-        document.getElementById('capacitationTitle').innerText = capacitation.name;
-        document.getElementById('pdfLink').href = capacitation.pdfLink;
-
-        // Funções para gerenciar o progresso
-        const totalItems = capacitation.exercises.length + 1; // Exercícios + PDF
-        let completedItems = 0;
-
-        // Inicializa as caixas de seleção e o progresso
-        window.onload = function() {
-            // Carrega o progresso do localStorage
-            const pdfCompleted = localStorage.getItem(capacitation.name + '_pdf') === 'true';
-            document.getElementById('pdfCheckbox').checked = pdfCompleted;
-            if (pdfCompleted) completedItems++;
-
-            // Carrega os exercícios
-            const exercisesList = document.getElementById('exercisesList');
-            capacitation.exercises.forEach(exercise => {
-                const li = document.createElement('li');
-
-                const label = document.createElement('label');
-                label.className = 'checkbox-label';
-
-                // Cria o link para o exercício
-                const exerciseLink = document.createElement('a');
-                exerciseLink.href = `exercise_feedback_python.html?capacitation=${encodeURIComponent(capacitation.name)}&exerciseId=${exercise.id}`;
-                exerciseLink.innerText = exercise.title;
-
-                // Verifica se o exercício foi concluído com sucesso
-                const key = capacitation.name + '_exercise_' + exercise.id;
-                const exerciseCompleted = localStorage.getItem(key) === 'completed';
-
-                // Cria um ícone de checkmark se o exercício foi concluído
-                if (exerciseCompleted) {
-                    const checkmarkIcon = document.createElement('span');
-                    checkmarkIcon.className = 'checkmark-icon';
-                    label.appendChild(checkmarkIcon);
-                    completedItems++;
-                } else {
-                    // Espaço reservado para alinhamento
-                    const emptySpace = document.createElement('span');
-                    emptySpace.className = 'empty-space';
-                    label.appendChild(emptySpace);
-                }
-
-                label.appendChild(exerciseLink);
-
-                li.appendChild(label);
-                exercisesList.appendChild(li);
-            });
-
-            updateProgressBar();
-
-            // Adiciona ouvinte para a caixa de seleção do PDF
-            document.getElementById('pdfCheckbox').addEventListener('change', updateProgress);
-        };
-
-        function updateProgress() {
-            completedItems = 0;
-
-            // Verifica a caixa de seleção do PDF
-            const pdfCheckbox = document.getElementById('pdfCheckbox');
-            if (pdfCheckbox.checked) {
-                completedItems++;
-                localStorage.setItem(capacitation.name + '_pdf', 'true');
-            } else {
-                localStorage.setItem(capacitation.name + '_pdf', 'false');
-            }
-
-            // Atualiza o progresso dos exercícios
-            capacitation.exercises.forEach(exercise => {
-                const key = capacitation.name + '_exercise_' + exercise.id;
-                const exerciseCompleted = localStorage.getItem(key) === 'completed';
-                if (exerciseCompleted) {
-                    completedItems++;
-                }
-            });
-
-            updateProgressBar();
-        }
-
-        function updateProgressBar() {
-            const percentage = Math.round((completedItems / totalItems) * 100);
-            const progressFill = document.getElementById('progressFill');
-            const progressText = document.getElementById('progressText');
-
-            progressFill.style.width = percentage + '%';
-            progressText.innerText = percentage + '% concluído';
-        }
-    </script>
+    <footer class="footer bg-ds-dark text-gray-400">
+        <div class="container py-6 text-center">
+            &copy; 2025 Liga DS UNICAMP.
+        </div>
+    </footer>
 </body>
 </html>

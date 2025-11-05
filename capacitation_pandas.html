@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Python Intermediário: Estruturas e Bibliotecas</title>
+    <title>Dominando Pandas para Análise</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="styles.css">
     
@@ -16,14 +16,14 @@
             --medium-gray: #6b7280;
             --light-gray: #f3f4f6;
             --white: #ffffff;
-            --light-primary: #e3f2fd; /* Fundo claro para tags */
+            --light-primary: #e3f2fd; 
             --radius-lg: 0.75rem;
             --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         .course-detail-hero {
             padding: 3rem 0;
-            background: linear-gradient(90deg, #b71c1c 0%, #d84315 100%); /* Tema Vermelho/Laranja */
+            background: linear-gradient(90deg, #1e3a8a 0%, #38a169 100%); /* Tema Verde/Azul para Pandas */
             color: var(--white);
         }
 
@@ -115,28 +115,28 @@
     <section class="course-detail-hero">
         <div class="container grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div class="lg:col-span-2">
-                <p class="text-secondary font-semibold mb-2 text-sm uppercase">Python / Programação Intermediária</p>
-                <h1 class="text-4xl font-extrabold mb-3">Python Intermediário: Estruturas e Bibliotecas</h1>
-                <p class="text-xl opacity-90 mb-4">Aprofunde-se em Funções, Estruturas de Repetição, e no uso de Classes e Bibliotecas essenciais.</p>
+                <p class="text-secondary font-semibold mb-2 text-sm uppercase">Data Science / Análise de Dados</p>
+                <h1 class="text-4xl font-extrabold mb-3">Dominando Pandas para Análise</h1>
+                <p class="text-xl opacity-90 mb-4">Aprenda a estrutura Data Frame e os comandos essenciais para a manipulação e filtragem de dados em Python.</p>
                 
                 <div class="flex flex-wrap items-center space-x-6 text-sm font-medium">
-                    <span class="tag-style bg-light-primary text-dark-gray px-3 py-1 rounded-full">INTERMEDIÁRIO</span>
+                    <span class="tag-style bg-light-primary text-dark-gray px-3 py-1 rounded-full">ESPECIALIZAÇÃO</span>
                     <span class="text-white opacity-90 flex items-center">
                         <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l3 3a1 1 0 001.414-1.414L11 9.586V6z" clip-rule="evenodd"></path></svg>
-                        Duração Estimada: 12 horas de estudo
+                        Duração Estimada: 5 horas de estudo
                     </span>
                 </div>
             </div>
 
             <div class="lg:col-span-1">
                 <div class="course-sidebar-card">
-                    <img src="https://placehold.co/700x400/b71c1c/fbe9e7?text=PYTHON+INTERMEDIÁRIO" alt="Capa do Curso" class="course-cover-image mb-4">
+                    <img src="https://placehold.co/700x400/38a169/f0fdf4?text=PANDAS+AVANÇADO" alt="Capa do Curso" class="course-cover-image mb-4">
 
                     <h4 class="text-3xl font-extrabold text-ds-dark mb-4">
                         Acesso Ilimitado
                     </h4>
 
-                    <a href="https://drive.google.com/file/d/1mRHPROPgbMYV0aULZoe103RCiixs98cd/view" 
+                    <a href="https://drive.google.com/file/d/1uTbgbLr_trUPFNYW8DeYsIQ0rZQ4hUey/view" 
                        target="_blank"
                        class="cta-button-access w-full block text-center py-3 text-xl rounded-lg mb-2">
                         Acessar Material
@@ -144,9 +144,9 @@
                     
                     <h4 class="text-lg font-bold mt-6 mb-3 text-ds-dark border-t pt-3">Material Incluído:</h4>
                     <ul class="space-y-2 text-sm text-medium-gray">
-                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zM5 9h10v2H5V9zm0 3h6v2H5v-2z"></path></svg>1 Apostila PDF Completa (Intermediário)</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zM5 9h10v2H5V9zm0 3h6v2H5v-2z"></path></svg>1 Guia PDF Completo sobre Pandas</li>
                         <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M12.928 2.072A1 1 0 0012 2H8a1 1 0 00-.707 1.707L8.586 6H4a1 1 0 00-1 1v7a1 1 0 001 1h8a1 1 0 001-1v-7a1 1 0 00-1-1h-4.586l1.293-1.293A1 1 0 0012.928 2.072z" clip-rule="evenodd"></path></svg>Acesso Vitalício</li>
-                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.933-.645l4-12a1 1 0 011.265-.633zM7.07 9.293a1 1 0 010 1.414L3.757 14.07a1 1 0 01-1.414-1.414l3.313-3.314a1 1 0 011.414 0zm9.15 0a1 1 0 000 1.414l3.313 3.314a1 1 0 001.414-1.414l-3.313-3.314a1 1 0 00-1.414 0z" clip-rule="evenodd"></path></svg>Exemplos de Código (Bibliotecas e Funções)</li>
+                        <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.933-.645l4-12a1 1 0 011.265-.633zM7.07 9.293a1 1 0 010 1.414L3.757 14.07a1 1 0 01-1.414-1.414l3.313-3.314a1 1 0 011.414 0zm9.15 0a1 1 0 000 1.414l3.313 3.314a1 1 0 001.414-1.414l-3.313-3.314a1 1 0 00-1.414 0z" clip-rule="evenodd"></path></svg>Exemplos de Código (Data Frames e Series)</li>
                     </ul>
                 </div>
             </div>
@@ -158,19 +158,19 @@
         <div class="lg:col-span-2">
 
             <section class="mb-8 p-6 bg-white rounded-lg shadow-md border-t-4 border-ds-primary">
-                <h2 class="text-2xl font-bold text-ds-dark mb-4">Sobre a Apostila de Python Intermediário</h2>
+                <h2 class="text-2xl font-bold text-ds-dark mb-4">Sobre o Guia de Pandas para Análise</h2>
                 <p class="text-medium-gray leading-relaxed">
-                    Nesta apostila, abordamos de forma mais profunda o que são bibliotecas, como encontrá-las, como instalá-las e como aprender a utilizá-las. Bibliotecas são estruturadas utilizando arquivos de código, que contêm as definições das funções e classes que serão carregadas pelo comando `import`. Além disso, o guia cobre a lógica por trás da Programação Orientada a Objetos (POO), definindo o que são Classes e Objetos e como criar Funções customizadas com argumentos flexíveis como `*args` e `**kwargs`.
+                    Pandas é um pacote open-source criado para análise e manipulação de dados, com o objetivo de ser uma ferramenta rápida, flexível e de fácil utilização. Este pacote se destaca ao lidar com dados tabulares (formato de tabela). Ele define duas estruturas importantes no Python: o Data Frame (com linhas e colunas) e o Series (unidimensional). O guia abrange as principais ferramentas para o tratamento e análise exploratória de dados.
                 </p>
             </section>
 
             <section class="mb-8 p-6 content-section">
                 <h2 class="text-2xl font-bold text-ds-dark mb-4">O que você aprenderá (Metas)</h2>
                 <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 list-icon-check">
-                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Entender o uso do comando `import` e a estrutura das Bibliotecas.</span></li>
-                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Dominar o uso de Dicionários (`dict`) e Tuplas (`tuple`).</span></li>
-                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Criar funções personalizadas (`def`) com argumentos flexíveis (`*args`, `**kwargs`).</span></li>
-                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Aplicar o conceito de Classes, Objetos e Programação Orientada a Objetos (POO).</span></li>
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Dominar a criação e manipulação das estruturas Data Frame e Series.</span></li>
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Realizar a leitura de arquivos externos (CSV, Excel, SQL) para Data Frames.</span></li>
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Utilizar `.loc` e `.iloc` para obter e filtrar dados com base em condições.</span></li>
+                    <li class="list-item-aligned text-ds-dark font-medium"><svg class="w-4 h-4 mt-1 mr-2" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg><span>Realizar operações de mesclagem (`pd.concat`) e remoção de dados (`.drop`).</span></li>
                 </ul>
             </section>
             
@@ -180,14 +180,14 @@
                 <div class="space-y-4">
                     
                     <details class="content-section" open>
-                        <summary class="content-header text-lg">Capítulo 1: Bibliotecas e Ferramentas Essenciais</summary>
+                        <summary class="content-header text-lg">Capítulo 1: Introdução, Criação e Leitura de Arquivos</summary>
                         <div class="content-body space-y-3">
-                            <p class="text-sm text-medium-gray">Tópicos: Estrutura das Bibliotecas, Uso do `import`, Bibliotecas mais utilizadas (Pandas, Numpy, Keras, TensorFlow, Scikit-learn).</p>
-                            <a href="https://drive.google.com/file/d/1mRHPROPgbMYV0aULZoe103RCiixs98cd/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
+                            <p class="text-sm text-medium-gray">Tópicos: Introdução a Pandas, Criando dados (Data Frame e Series), Lendo Arquivos (CSV, Excel, SQL).</p>
+                            <a href="https://drive.google.com/file/d/1uTbgbLr_trUPFNYW8DeYsIQ0rZQ4hUey/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
-                                Acessar Apostila Completa (PDF)
+                                Acessar PDF / Introdução e Criação
                             </a>
-                            <a href="exercise_feedback_machine.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                            <a href="exercise_feedback.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
                                 Acessar Exercícios do Módulo
                             </a>
@@ -195,14 +195,14 @@
                     </details>
                     
                     <details class="content-section">
-                        <summary class="content-header text-lg">Capítulo 2: Estruturas de Repetição e Tipos de Variáveis II</summary>
+                        <summary class="content-header text-lg">Capítulo 2: Renomear e Filtragem (`loc` e `iloc`)</summary>
                         <div class="content-body space-y-3">
-                            <p class="text-sm text-medium-gray">Tópicos: Estruturas de Repetição (`while` e `for`), uso do `enumerate`, Tipo Dicionário (`dict`), Tipo Tupla (`tuple`) e imutabilidade.</p>
-                             <a href="https://drive.google.com/file/d/1mRHPROPgbMYV0aULZoe103RCiixs98cd/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
+                            <p class="text-sm text-medium-gray">Tópicos: Renomeando (Linhas e Colunas), Obtenção e Filtragem de Dados (`loc` e `iloc`).</p>
+                             <a href="https://drive.google.com/file/d/1uTbgbLr_trUPFNYW8DeYsIQ0rZQ4hUey/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                 Acessar Apostila Completa (PDF)
                             </a>
-                            <a href="exercise_feedback_machine.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                            <a href="exercise_feedback.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
                                 Acessar Exercícios do Módulo
                             </a>
@@ -210,14 +210,14 @@
                     </details>
                     
                     <details class="content-section">
-                        <summary class="content-header text-lg">Capítulo 3: Funções e Classes (POO)</summary>
+                        <summary class="content-header text-lg">Capítulo 3: Adicionar, Remover e Mesclar Dados</summary>
                         <div class="content-body space-y-3">
-                            <p class="text-sm text-medium-gray">Tópicos: Criação de Funções (`def`, `return`), Argumentos Flexíveis (`*args`, `**kwargs`), Classes e Objetos (POO).</p>
-                             <a href="https://drive.google.com/file/d/1mRHPROPgbMYV0aULZoe103RCiixs98cd/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
+                            <p class="text-sm text-medium-gray">Tópicos: Adicionar Dados (`.loc`), Remover Dados (`.drop`), Mesclando Data Frames (`pd.concat`) e Ferramentas básicas.</p>
+                             <a href="https://drive.google.com/file/d/1uTbgbLr_trUPFNYW8DeYsIQ0rZQ4hUey/view" target="_blank" class="text-primary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                 Acessar Apostila Completa (PDF)
                             </a>
-                            <a href="exercise_feedback_machine.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                            <a href="exercise_feedback.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
                                 Acessar Exercícios do Módulo
                             </a>
@@ -230,26 +230,27 @@
             <section class="mt-8 p-6 bg-light-gray rounded-lg border border-gray-300">
                 <h2 class="text-2xl font-bold text-ds-dark mb-3">Requisitos</h2>
                 <ul class="list-disc list-inside space-y-1 text-medium-gray pl-4">
-                    <li>Conhecimento sólido na sintaxe básica do Python (como a Apostila 1).</li>
-                    <li>Familiaridade com estruturas de dados como Listas e Strings.</li>
+                    <li>Familiaridade com o Guia de Python Básico (Variáveis e Estruturas).</li>
+                    <li>Noções básicas de Python.</li>
+                    <li>Desejo de dominar a manipulação de dados em escala.</li>
                 </ul>
             </section>
         </div>
 
         <div class="lg:col-span-1 hidden lg:block">
             <div class="course-sidebar-card">
-                 <img src="https://placehold.co/700x400/b71c1c/fbe9e7?text=PYTHON+INTERMEDIÁRIO" alt="Capa do Curso" class="course-cover-image mb-4">
+                 <img src="https://placehold.co/700x400/38a169/f0fdf4?text=PANDAS+AVANÇADO" alt="Capa do Curso" class="course-cover-image mb-4">
                  <h4 class="text-3xl font-extrabold text-ds-dark mb-4">Acesso Ilimitado</h4>
-                 <a href="https://drive.google.com/file/d/1mRHPROPgbMYV0aULZoe103RCiixs98cd/view" 
+                 <a href="https://drive.google.com/file/d/1uTbgbLr_trUPFNYW8DeYsIQ0rZQ4hUey/view" 
                     target="_blank"
                     class="cta-button-access w-full block text-center py-3 text-xl rounded-lg mb-2">
                      Acessar Material
                  </a>
                  <h4 class="text-lg font-bold mt-6 mb-3 text-ds-dark border-t pt-3">Material Incluído:</h4>
                  <ul class="space-y-2 text-sm text-medium-gray">
-                     <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zM5 9h10v2H5V9zm0 3h6v2H5v-2z"></path></svg>1 Apostila PDF Completa (Intermediário)</li>
+                     <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2H4zM5 9h10v2H5V9zm0 3h6v2H5v-2z"></path></svg>1 Guia PDF Completo sobre Pandas</li>
                      <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"></path><path fill-rule="evenodd" d="M12.928 2.072A1 1 0 0012 2H8a1 1 0 00-.707 1.707L8.586 6H4a1 1 0 00-1 1v7a1 1 0 001 1h8a1 1 0 001-1v-7a1 1 0 00-1-1h-4.586l1.293-1.293A1 1 0 0012.928 2.072z" clip-rule="evenodd"></path></svg>Acesso Vitalício</li>
-                     <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.933-.645l4-12a1 1 0 011.265-.633zM7.07 9.293a1 1 0 010 1.414L3.757 14.07a1 1 0 01-1.414-1.414l3.313-3.314a1 1 0 011.414 0zm9.15 0a1 1 0 000 1.414l3.313 3.314a1 1 0 001.414-1.414l-3.313-3.314a1 1 0 00-1.414 0z" clip-rule="evenodd"></path></svg>Exemplos de Código (Bibliotecas e Funções)</li>
+                     <li class="flex items-center"><svg class="w-5 h-5 mr-2 text-primary" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.933-.645l4-12a1 1 0 011.265-.633zM7.07 9.293a1 1 0 010 1.414L3.757 14.07a1 1 0 01-1.414-1.414l3.313-3.314a1 1 0 011.414 0zm9.15 0a1 1 0 000 1.414l3.313 3.314a1 1 0 001.414-1.414l-3.313-3.314a1 1 0 00-1.414 0z" clip-rule="evenodd"></path></svg>Exemplos de Código (Data Frames e Series)</li>
                  </ul>
             </div>
         </div>

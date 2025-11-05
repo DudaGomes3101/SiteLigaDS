@@ -77,7 +77,7 @@ function handleAuth() {
             // Redireciona para o dashboard
             accessMessage.innerText = "Login realizado com sucesso! Redirecionando...";
             setTimeout(() => {
-                window.location.href = "dashboard.html";
+                window.location.href = "capacitations.html";
             }, 1500);
         } else {
             accessMessage.innerText = "Usuário ou senha incorretos.";
