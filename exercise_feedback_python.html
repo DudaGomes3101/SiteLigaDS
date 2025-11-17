@@ -2,227 +2,212 @@
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <title>Exercício - Análise de Dados com Python</title>
-    <link rel="stylesheet" href="styles2.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="page-title">Exercícios Python Básico</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        :root {
+            --primary-color: #0d47a1; 
+            --secondary-color: #ffc107; 
+            --dark-gray: #1f2937;
+            --medium-gray: #6b7280;
+            --white: #ffffff;
+            --light-primary: #e3f2fd;
+        }
+
+        body {
+            background-color: var(--light-gray);
+            color: var(--dark-gray);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+        }
+
+        .exercise-header {
+            background: linear-gradient(90deg, var(--primary-color) 0%, #1a7d87 100%);
+            color: var(--white);
+            padding: 2rem 0;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        
+        .card-exercise {
+            background-color: var(--white);
+            border-radius: 0.75rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--secondary-color);
+        }
+        
+        .btn-start {
+            background-color: var(--secondary-color);
+            color: var(--dark-gray);
+            font-weight: bold;
+            transition: background-color 0.2s;
+        }
+        .btn-start:hover {
+            background-color: #e0b411;
+        }
+        
+        /* Estilo para o botão flutuante de Chat/Dúvidas */
+        .btn-chat-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+        }
+        .btn-chat-float:hover {
+            background-color: #1a7d87;
+        }
+    </style>
 </head>
 <body>
-    <!-- Cabeçalho -->
-    <header>
-        <h1 id="exerciseTitle">Exercício</h1>
-        <a href="capacitation_python.html" id="backLink" class="button">Voltar à Capacitação</a>
+
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-md border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <a href="index.html" class="logo-section">
+                <div><img class="logo-ds" src="image/logo.jpeg" alt="Liga de Data Science UNICAMP"></div>
+                <div class="logo-text"><h1>Liga de Data Science</h1><span>UNICAMP</span></div>
+            </a>
+            <a href="capacitacoes.html" class="text-ds-dark hover:text-ds-primary transition font-medium">
+                Catálogo de Cursos
+            </a>
+        </div>
     </header>
 
-    <!-- Conteúdo Principal -->
-    <main class="exercise-container">
-        <section class="exercise-section">
-            <h2 id="exerciseName">Exercício</h2>
-            <div id="exerciseContent">
-                <!-- Conteúdo do exercício será inserido aqui -->
-            </div>
-            <div id="feedbackContent" class="feedback-message">
-                <!-- O feedback será inserido aqui -->
-            </div>
-        </section>
-    <div id="feedbackContent" class="feedback-message">
-                </div>
-            <button id="openChatButton" class="button">Tirar Dúvidas</button>
-        </section>
+    <section class="exercise-header">
+        <div class="max-w-7xl mx-auto px-4">
+            <h1 class="text-3xl font-extrabold text-secondary mb-2">
+                Exercícios de Verificação
+            </h1>
+            <h2 id="module-title" class="text-xl opacity-90">Carregando Módulo...</h2>
+        </div>
+    </section>
 
-        <section class="chat-section" id="chatSection" style="display: none;">
-            <h2>Envie uma Mensagem para Tirar Dúvidas</h2>
-            <div id="chatContainer">
-                </div>
-            <form id="chatForm">
-                <label for="userMessage">Sua Mensagem:</label>
-                <textarea id="userMessage" name="userMessage" rows="4" required></textarea>
-                <button type="submit" class="button">Enviar Mensagem</button>
-            </form>
-        </section>
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+
+        <div id="exercise-content" class="card-exercise p-6">
+            <div class="text-center py-8">
+                <p class="text-lg font-semibold text-ds-dark">Selecione um módulo de exercício na página do curso.</p>
+            </div>
+        </div>
+        
+        <div id="error-message" class="hidden text-center py-8 text-red-600">
+             Módulo de exercício não encontrado.
+        </div>
+
+        <p class="text-sm text-ds-medium-gray text-center mt-8">
+            *O feedback sobre as suas respostas será enviado por email ou disponibilizado pelo Forms da Liga DS.
+        </p>
     </main>
+    
+    <a href="https://forms.gle/link_para_forms_duvidas_liga_ds" target="_blank" class="btn-chat-float">
+        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10c0 3.866-3.582 7-8 7a8.88 8.88 0 01-4.707-1.378l-3.327.971a.5.5 0 01-.646-.646l.971-3.327A8.88 8.88 0 012 10c0-3.866 3.582-7 8-7s8 3.134 8 7zM9 8a1 1 0 100 2h2a1 1 0 100-2H9z" clip-rule="evenodd"></path></svg>
+        Tirar Dúvidas
+    </a>
 
-    <!-- JavaScript -->
+    <footer class="bg-ds-dark text-gray-400 py-6 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            &copy; 2025 Liga DS UNICAMP.
+        </div>
+    </footer>
+    
     <script>
-        // Simula o tipo de usuário
-        const userType = sessionStorage.getItem("userType") || "externo";
-
-        // Obtém os parâmetros da URL
-        const urlParams = new URLSearchParams(window.location.search);
-        // Ajusta o nome da capacitação com base no contexto do arquivo
-        const defaultCapacitationName = document.title.includes('Python') ? 'Análise de Dados com Python' :
-                                       document.title.includes('Machine') ? 'Machine Learning Avançado' :
-                                       'Introdução à Ciência de Dados';
-                                       
-        const capacitationName = urlParams.get('capacitation') || defaultCapacitationName;
-        const exerciseId = urlParams.get('exerciseId');
-
-        // Dados dos exercícios (Atenção: MANTENHA A VERSÃO CORRETA PARA CADA PÁGINA!)
-        // EXERCÍCIO PYTHON:
-        const exercisesDataPython = {
-            1: { title: "Exercício 1: Introdução ao Python", question: "Escreva um programa em Python que imprima 'Hello, World!' na tela." },
-            2: { title: "Exercício 2: Manipulação de Dados com Pandas", question: "Carregue um DataFrame a partir de um arquivo CSV e exiba as primeiras 5 linhas." },
-            3: { title: "Exercício 3: Visualização de Dados com Matplotlib", question: "Crie um gráfico de linha simples utilizando dados de exemplo." }
-        };
-        // EXERCÍCIO MACHINE LEARNING:
-        const exercisesDataMachine = {
-            1: { title: "Exercício 1: Regressão Linear", question: "Implemente uma regressão linear simples utilizando o conjunto de dados fornecido." },
-            2: { title: "Exercício 2: Árvores de Decisão", question: "Desenvolva uma árvore de decisão para classificação de dados." },
-            3: { title: "Exercício 3: Redes Neurais", question: "Crie uma rede neural básica para reconhecimento de dígitos." }
-        };
-
-        const exercisesData = capacitationName.includes('Python') ? exercisesDataPython : exercisesDataMachine;
-        
-        // Atualiza o título e link de volta
-        const exerciseData = exercisesData[exerciseId];
-        const backLinkTarget = capacitationName.includes('Python') ? 'capacitation_python.html' : 'capacitations_machine.html';
-
-        if (exerciseData) {
-            document.getElementById('exerciseTitle').innerText = exerciseData.title;
-            document.getElementById('exerciseName').innerText = exerciseData.title;
-            document.getElementById('backLink').href = backLinkTarget;
-
-            // Exibe a pergunta do exercício
-            const exerciseContent = document.getElementById('exerciseContent');
-            exerciseContent.innerHTML = `
-                <p>${exerciseData.question}</p>
-                <form id="exerciseForm">
-                    <label for="userAnswer">Seu Código:</label><br>
-                    <textarea id="userAnswer" name="userAnswer" rows="10" cols="50" required></textarea><br>
-                    <button type="submit" class="button">Enviar Resposta</button>
-                </form>
-            `;
-        } else {
-            document.getElementById('exerciseContent').innerText = "Exercício não encontrado.";
-        }
-
-        // ===========================================
-        // LÓGICA DE SUBMISSÃO E PROGRESSO (AJUSTADA)
-        // ===========================================
-
-        document.addEventListener('DOMContentLoaded', function() {
-            const form = document.getElementById('exerciseForm');
-            if (form) {
-                form.addEventListener('submit', function(event) {
-                    event.preventDefault();
-
-                    const userAnswer = document.getElementById('userAnswer').value.trim();
-                    const feedbackContent = document.getElementById('feedbackContent');
-
-                    if (userAnswer !== "") {
-                        // NOVO: Mensagem de submissão para avaliação
-                        feedbackContent.innerText = "Código submetido para avaliação. Você será notificado sobre o feedback.";
-                        feedbackContent.style.color = "green";
-                        
-                        // Marca o exercício como concluído no localStorage
-                        const key = capacitationName + '_exercise_' + exerciseId;
-                        localStorage.setItem(key, 'completed');
-
-                    } else {
-                        feedbackContent.innerText = "Por favor, insira seu código.";
-                        feedbackContent.style.color = "red";
-                    }
-                });
+        // --- BASE DE DADOS SIMULADA PARA OS EXERCÍCIOS ---
+        const EXERCISES_DATA = {
+            '1': {
+                title: "Capítulo 1: Introdução, Variáveis e IDEs",
+                description: "Avaliação do conhecimento sobre a introdução ao Python, IDEs, e a definição de variáveis e tipos básicos.",
+                link_forms: "https://forms.gle/exemplo_forms_real_capitulo1", 
+                tasks: [
+                    "O que é uma IDE e qual a principal vantagem do Google Colab?",
+                    "Explique o conceito de variável em Python.",
+                    "Identifique o tipo das seguintes variáveis: `x = 10`, `y = 3.14`, `z = 'True'`."
+                ]
+            },
+            '2': {
+                title: "Capítulo 2: Listas, Strings e Operações",
+                description: "Exercícios sobre indexação, fatiamento (slicing) de listas e strings, e o uso de operadores matemáticos e de concatenação.",
+                link_forms: "https://forms.gle/exemplo_forms_real_capitulo2",
+                tasks: [
+                    "Como você acessa o terceiro elemento de uma lista chamada `cores`?",
+                    "Qual o resultado da operação `print('Data' + ' ' + 'Science')`?",
+                    "Escreva o código para obter a parte inteira da divisão de 17 por 5."
+                ]
+            },
+            '3': {
+                title: "Capítulo 3: Estruturas Condicionais e Lógicas",
+                description: "Desafios para aplicar o `if/else`, operadores relacionais (`==`, `>`) e operadores lógicos (`and`, `or`).",
+                link_forms: "https://forms.gle/exemplo_forms_real_capitulo3",
+                tasks: [
+                    "Quando o bloco de código de um `if else` é executado?",
+                    "O que é um valor Booleano?",
+                    "Crie uma condição que só é verdadeira se A for maior que B **e** C for igual a 10."
+                ]
             }
-            
-            // NOVO: Inicializa o histórico de mensagens
-            loadMessages();
-        });
+        };
 
-        // ===========================================
-        // LÓGICA DO CHAT/DÚVIDAS (COPIADA DO 1+1)
-        // ===========================================
-        
-        const currentExerciseTitle = exerciseData ? exerciseData.title : 'Exercício Não Encontrado';
-
-        // Função para armazenar mensagens no localStorage
-        function storeMessage(messageObj) {
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-            messages.push(messageObj);
-            localStorage.setItem('messages', JSON.stringify(messages));
-        }
-        
-        // Função para exibir mensagens salvas
-        function loadMessages() {
-            const chatContainer = document.getElementById('chatContainer');
-            if (!chatContainer) return;
-            chatContainer.innerHTML = '';
-            
-            const messages = JSON.parse(localStorage.getItem('messages')) || [];
-            
-            messages.filter(msg => msg.exerciseId == exerciseId && msg.exerciseTitle === currentExerciseTitle)
-                    .forEach(msg => {
-                        const messageElement = document.createElement('div');
-                        messageElement.classList.add('message', msg.from === 'user' ? 'user-message' : 'support-message');
-                        messageElement.innerText = msg.content;
-                        chatContainer.appendChild(messageElement);
-                    });
-            chatContainer.scrollTop = chatContainer.scrollHeight;
+        // Função para obter o parâmetro da URL
+        function getQueryParam(param) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(param);
         }
 
-        // Simula a resposta do suporte e armazena no localStorage
-        function simulateSupportResponse(userMessage) {
-            setTimeout(function() {
-                const chatContainer = document.getElementById('chatContainer');
-                const supportMessage = "Obrigado pela sua mensagem: '" + userMessage.substring(0, 30) + "...'. Nossa equipe entrará em contato em breve para tirar sua dúvida.";
+        // Função principal para carregar o conteúdo do exercício
+        function loadExercise() {
+            const chapterId = getQueryParam('capitulo');
+            const exerciseData = EXERCISES_DATA[chapterId];
+            const contentDiv = document.getElementById('exercise-content');
+            const errorDiv = document.getElementById('error-message');
+            const titleElement = document.getElementById('module-title');
+            
+            if (!exerciseData) {
+                titleElement.textContent = "Selecione um Módulo de Exercício";
+                contentDiv.innerHTML = `
+                    <div class="text-center py-8">
+                        <p class="text-lg font-semibold text-ds-dark">Acesse a página de detalhes do curso e clique no botão "Acessar Exercícios" de um dos capítulos.</p>
+                        <a href="capacitation_python.html" class="mt-4 inline-flex items-center text-primary hover:underline">
+                            Voltar para Fundamentos de Python
+                        </a>
+                    </div>
+                `;
+                return;
+            }
+
+            document.title = `${exerciseData.title} - Python Básico`;
+            titleElement.textContent = exerciseData.title;
+
+            let tasksHtml = exerciseData.tasks.map((task, index) => 
+                `<li class="mb-3 text-ds-dark"><strong>${index + 1}.</strong> ${task}</li>`
+            ).join('');
+
+            contentDiv.innerHTML = `
+                <p class="text-md text-ds-medium-gray mb-6">${exerciseData.description}</p>
                 
-                const responseElement = document.createElement('div');
-                responseElement.classList.add('message', 'support-message');
-                responseElement.innerText = supportMessage;
-                chatContainer.appendChild(responseElement);
+                <h3 class="text-xl font-bold text-ds-dark mb-3 mt-4 border-b pb-2">Tarefas e Desafios de Código</h3>
+                <ul class="list-none space-y-3 pl-0">
+                    ${tasksHtml}
+                </ul>
+                
+                <p class="text-sm text-ds-dark mt-8 italic">
+                    Para enviar suas respostas ou realizar o quiz de autoavaliação, acesse o Forms oficial:
+                </p>
 
-                const supportMessageObj = {
-                    exerciseId: exerciseId,
-                    exerciseTitle: currentExerciseTitle,
-                    from: 'support',
-                    content: supportMessage,
-                    date: new Date().toLocaleString(),
-                    read: false
-                };
-                storeMessage(supportMessageObj);
-                chatContainer.scrollTop = chatContainer.scrollHeight;
-            }, 1000);
+                <a href="${exerciseData.link_forms}" target="_blank" class="mt-4 w-full text-center py-3 rounded-lg btn-start flex items-center justify-center text-lg">
+                    Enviar Respostas (via Forms)
+                    <svg class="w-5 h-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11 3a1 1 0 100 2h3a1 1 0 100-2h-3z"></path><path d="M11 7a1 1 0 100 2h3a1 1 0 100-2h-3z"></path><path d="M11 11a1 1 0 100 2h3a1 1 0 100-2h-3z"></path><path fill-rule="evenodd" d="M15 17a1 1 0 00-1-1H3a1 1 0 00-1 1v1h14v-1zM2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm12 2a1 1 0 100 2h3a1 1 0 100-2h-3z" clip-rule="evenodd"></path></svg>
+                </a>
+            `;
         }
 
-        // Event listener para abrir a seção de chat
-        document.getElementById('openChatButton').addEventListener('click', function() {
-            const chatSection = document.getElementById('chatSection');
-            if (chatSection.style.display === 'none') {
-                chatSection.style.display = 'block';
-                loadMessages(); // Carrega as mensagens ao abrir
-                chatSection.scrollIntoView({ behavior: 'smooth' });
-            } else {
-                chatSection.style.display = 'none';
-            }
-        });
-
-        // Event listener para enviar a mensagem do chat
-        document.getElementById('chatForm').addEventListener('submit', function(event) {
-            event.preventDefault(); 
-
-            const userMessage = document.getElementById('userMessage').value;
-            const chatContainer = document.getElementById('chatContainer');
-
-            const messageElement = document.createElement('div');
-            messageElement.classList.add('message', 'user-message');
-            messageElement.innerText = userMessage;
-            chatContainer.appendChild(messageElement);
-
-            document.getElementById('userMessage').value = '';
-
-            const messageObj = {
-                exerciseId: exerciseId,
-                exerciseTitle: currentExerciseTitle,
-                from: 'user',
-                content: userMessage,
-                date: new Date().toLocaleString(),
-                read: true
-            };
-            storeMessage(messageObj);
-
-            simulateSupportResponse(userMessage);
-
-            chatContainer.scrollTop = chatContainer.scrollHeight;
-        });
-
+        document.addEventListener('DOMContentLoaded', loadExercise);
     </script>
 </body>
 </html>

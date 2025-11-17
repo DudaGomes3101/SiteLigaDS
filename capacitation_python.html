@@ -90,11 +90,30 @@
             color: var(--dark-gray); 
         }
         
-        /* Alinhamento dos itens da lista (Metas e Requisitos) */
+        /* Alinhamento dos itens da lista (Metas) */
         .list-item-aligned {
             display: flex;
             align-items: flex-start; /* Alinha o texto e o ícone no topo */
             text-align: left;
+        }
+
+        /* Estilo para o botão flutuante de Email/Dúvidas */
+        .btn-chat-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+            font-weight: 600;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+        }
+        .btn-chat-float:hover {
+            background-color: #1a7d87;
         }
     </style>
 </head>
@@ -126,6 +145,15 @@
                         Duração Estimada: 6 horas de estudo
                     </span>
                 </div>
+
+                <div class="p-4 mt-6 rounded-lg bg-white/10 border border-white/30">
+                    <h4 class="text-lg font-bold mb-2 text-secondary">Pré-requisitos</h4>
+                    <ul class="list-disc list-inside space-y-1 text-white text-sm opacity-90 pl-4">
+                        <li>Nenhuma experiência prévia em programação é necessária.</li>
+                        <li>Computador com acesso à internet para utilizar o Google Colab.</li>
+                    </ul>
+                </div>
+
             </div>
 
             <div class="lg:col-span-1">
@@ -187,9 +215,9 @@
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                 Acessar Apostila Completa (PDF)
                             </a>
-                            <a href="exercise_feedback_python.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                            <a href="https://forms.gle/wf7KFF7SE5b3GYwM9" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
-                                Acessar Exercícios de Variáveis
+                                Acessar Exercícios (Forms)
                             </a>
                         </div>
                     </details>
@@ -202,9 +230,9 @@
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                 Acessar Apostila Completa (PDF)
                             </a>
-                            <a href="exercise_feedback_python.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                            <a href="https://forms.gle/wf7KFF7SE5b3GYwM9" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
-                                Acessar Exercícios de Listas e Strings
+                                Acessar Exercícios (Forms)
                             </a>
                         </div>
                     </details>
@@ -217,22 +245,14 @@
                                 <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
                                 Acessar Apostila Completa (PDF)
                             </a>
-                            <a href="exercise_feedback_python.html" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
+                            <a href="https://forms.gle/wf7KFF7SE5b3GYwM9" target="_blank" class="text-secondary font-semibold hover:underline flex items-center text-sm">
                                 <svg class="w-4 h-4 mr-1" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm-2 9a1 1 0 112 0v2a1 1 0 11-2 0v-2zm4 0a1 1 0 012 0v2a1 1 0 11-2 0v-2zm-2-5a1 1 0 011-1h.5a1 1 0 011 1v.5a1 1 0 01-1 1H10a1 1 0 01-1-1v-.5z"></path></svg>
-                                Acessar Exercícios de Lógica
+                                Acessar Exercícios (Forms)
                             </a>
                         </div>
                     </details>
 
                 </div>
-            </section>
-            
-            <section class="mt-8 p-6 bg-light-gray rounded-lg border border-gray-300">
-                <h2 class="text-2xl font-bold text-ds-dark mb-3">Requisitos</h2>
-                <ul class="list-disc list-inside space-y-1 text-medium-gray pl-4">
-                    <li>Nenhuma experiência prévia em programação é necessária.</li>
-                    <li>Computador com acesso à internet para utilizar o Google Colab.</li>
-                </ul>
             </section>
         </div>
 
@@ -254,6 +274,11 @@
             </div>
         </div>
     </main>
+
+    <a href="mailto:ligads@unicamp.br?subject=DÚVIDA%20SOBRE%20PYTHON%20BÁSICO" class="btn-chat-float">
+        <svg class="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
+        Tirar Dúvidas (Email)
+    </a>
 
     <footer class="footer bg-ds-dark text-gray-400">
         <div class="container py-6 text-center">
